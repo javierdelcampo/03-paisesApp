@@ -1,0 +1,50 @@
+<div *ngIf="!paises || paises.length < 1; else divPais" class="alert alert-info animate__animated animate__fadeIn animate__faster">
+    Cargando datos del país. Espere por favor...
+</div>
+
+<ng-template #divPais>
+    <div class="row">Encontrados {{paises.length}} países</div>
+
+    <div *ngFor="let pais of paises; let i = index" class="row">
+        <div class="col-12">
+            <h1>País {{i + 1}} de {{paises.length}}: <small>{{ pais.name.common }}</small></h1>
+        </div>
+        <div class="row animate__animated animate__fadeIn animate__faster">
+            <div class="col">
+                <h3>Bandera</h3>
+                <img [src]="pais.flags.svg" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <h3>Información</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Población</strong> {{pais.population | number}}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Código</strong> {{pais.ccn3}}
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Alpha3</strong> {{pais.cca3}}
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="badge bg-primary m-1">{{ pais.translations.spa.official }}</span>
+                    <span class="badge bg-primary m-1">{{ pais.translations.rus.official }}</span>
+                    <span class="badge bg-primary m-1">{{ pais.translations.deu.official }}</span>
+                    <span class="badge bg-primary m-1">{{ pais.translations.fra.official }}</span>
+                    <span class="badge bg-primary m-1">{{ pais.translations.zho.official }}</span>
+                    <span class="badge bg-primary m-1">{{ pais.translations.ara.official }}</span>
+                </div>
+            </div>
+        </div>
+         
+    </div>
+    
+    <pre class="mt-5">
+        {{ paises | json }}
+    </pre>
+</ng-template>
+
+
